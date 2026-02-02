@@ -1,3 +1,19 @@
+--- /Amethyst-iOS/Natives/JavaLauncher.m
++++ /Amethyst-iOS/Natives/JavaLauncher.m
+@@ -1,5 +1,12 @@
+ #import <Foundation/Foundation.h>
+ #import <UIKit/UIKit.h>
++
++// Fix undeclared Mach functions on iOS 17 SDK+
++// Required for: task_set_exception_ports, mach_task_self, EXC_MASK_BAD_ACCESS, etc.
++#include <mach/mach.h>
++#include <mach/task.h>
++// Optional legacy include (safe):
++// #include <mach/mach_init.h>
+ 
+ // existing imports continue below...
+
+
 --- /Amethyst-iOS/Natives/MinecraftResourceDownloadTask.m
 +++ /Amethyst-iOS/Natives/MinecraftResourceDownloadTask.m
 @@ -315,14 +315,15 @@
